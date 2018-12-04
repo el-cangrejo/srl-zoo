@@ -69,7 +69,7 @@ def getNextState(srl_model, state, action, device):
 
         net_out = srl_model.forwardModel(state, action)
         state = detachToNumpy(net_out)[0]
-        print ("Next State : " + str(state))
+        # print ("Next State : " + str(state))
 
     return state
 
@@ -104,10 +104,6 @@ def main():
     data = json.load(open(args.log_dir + 'image_to_state.json'))
     X = np.array(list(data.values())).astype(float)
     y = list(data.keys())
-
-    bound_max, bound_min, fig_names = {}, {}, {}
-    start_indices, end_indices = {}, {}
-    start_idx = 0
 
     should_exit = False
 
