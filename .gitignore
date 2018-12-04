@@ -1,3 +1,7 @@
+# Vim
+*.swo
+*.swp
+
 # Custom
 data/
 .idea/
