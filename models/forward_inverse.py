@@ -11,9 +11,15 @@ class BaseForwardModel(BaseModelSRL):
         self.forward_net = None
         super(BaseForwardModel, self).__init__()
 
-    def initForwardNet(self, state_dim, action_dim):
+    def initForwardNet(self, state_dim, action_dim, n_hidden=128):
         self.action_dim = action_dim
-        self.forward_net = nn.Linear(state_dim + action_dim, state_dim)
+        self.forward_net = nn.Sequential(nn.Linear(state_dim + action_dim, n_hidden),
+                                         nn.ReLU(),
+                                         nn.Linear(n_hidden, n_hidden),
+                                         nn.ReLU(),
+                                         nn.Linear(n_hidden, state_dim),
+                                         nn.Tanh()
+                                         )
 
     def forward(self, x):
         raise NotImplementedError()
